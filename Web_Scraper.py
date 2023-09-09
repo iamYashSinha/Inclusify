@@ -24,7 +24,7 @@ if response.status_code == 200:
 
         data.append(product_info)
 
-    with open("Leg_Disability_Products.json", "w", encoding="utf-8") as json_file:
+    with open("VisualImpared.json", "w", encoding="utf-8") as json_file:
         json.dump(data, json_file, indent=4, ensure_ascii=False)
 
     print("Data has been scraped and saved in JSON format.")

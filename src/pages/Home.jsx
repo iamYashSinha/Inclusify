@@ -39,6 +39,59 @@ function Home() {
     };
   }, []);
 
+  const [secondPage, setSecondPage] = useState([]);
+  useEffect(() => {
+    // Firebase configuration
+    // Initialize Firebase
+    const fetchData = async () => {
+      // Create a reference to the specific formRef in the Realtime Database
+      const db = getDatabase(app);
+      const formRef = ref(db, `Disability/LegDisability`);
+      try {
+        // Fetch data from the Realtime Database
+        onValue(formRef, (snapshot) => {
+          const data = snapshot.val();
+          console.log(data);
+          setSecondPage(data || []); // Ensure it's an array or an empty array if undefined
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+    return () => {
+      // Unsubscribe from the Firebase listener if needed
+    };
+  }, []);
+
+  const[visual, setVisual] = useState([]);
+
+  useEffect(() => {
+    // Firebase configuration
+    // Initialize Firebase
+    const fetchData = async () => {
+      // Create a reference to the specific formRef in the Realtime Database
+      const db = getDatabase(app);
+      const formRef = ref(db, `Disability/VisualImpaired`);
+      try {
+        // Fetch data from the Realtime Database
+        onValue(formRef, (snapshot) => {
+          const data = snapshot.val();
+          console.log(data);
+          setVisual(data || []); // Ensure it's an array or an empty array if undefined
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+    return () => {
+      // Unsubscribe from the Firebase listener if needed
+    };
+  }, []);
+
   return (
     <div>
       <Header />
@@ -49,14 +102,13 @@ function Home() {
           width="90%"
           padding="10"
           listStyleType="none">
-          <Tab _selected={{ color: "#40a46c" }} >Hearing Products</Tab>
-          <Tab _selected={{ color: "#40a46c" }}>Blind Products</Tab>
-          <Tab _selected={{ color: "#40a46c" }}>Dumb Products</Tab>
+          <Tab _selected={{ color: "#40a46c" }} >Handicap Products</Tab>
+          <Tab _selected={{ color: "#40a46c" }}>Mobility Aid</Tab>
+          <Tab _selected={{ color: "#40a46c" }}>Visual Impaired</Tab>
         </TabList>
         <TabIndicator mt="-1.5px" height="2px" bg="#40a46c" borderRadius="1px" />
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
             {disability && disability.length > 0 ? (
               <CardLayouts data={disability} />
             ) : (
@@ -64,10 +116,10 @@ function Home() {
             )}
           </TabPanel>
           <TabPanel>
-            <p>two!</p>
+            <CardLayouts data={secondPage} />
           </TabPanel>
           <TabPanel>
-            <p>three!</p>
+            <CardLayouts data={visual}/>
           </TabPanel>
         </TabPanels>
       </Tabs>

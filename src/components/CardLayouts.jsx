@@ -83,12 +83,12 @@ function CardLayouts({ data }) {
   };
 
   useEffect(() => {
+    // Filter products based on searchQuery
     const filtered = data.filter((product) =>
       product["Product Name"].toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProducts(filtered);
   }, [searchQuery, data]);
-
   return (
     <>
       <div

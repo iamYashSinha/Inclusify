@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+
 import {
   Box,
   Button,
@@ -25,17 +27,16 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import {
-  FaHeart,
   FaSearch,
-  FaShoppingCart,
   FaSort,
   FaFilter,
+  FaMicrophone,
 } from "react-icons/fa";
 import jsonData from "../utils/Hand_Disability_Products.json";
 
 function CardLayouts({ data }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(data);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
   const [sortOption, setSortOption] = useState("Relevance"); // Default sorting option
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -91,13 +92,19 @@ function CardLayouts({ data }) {
     marginTop: "5px",
   };
 
+  const {
+    transcript,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
   useEffect(() => {
     // Filter products based on searchQuery
-    const filtered = data.filter((product) =>
+    const filtered = jsonData.filter((product) =>
       product["Product Name"].toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProducts(filtered);
-  }, [searchQuery, data]);
+  }, [searchQuery]);
 
   //   useEffect(() => {
   //   // Filter products based on searchQuery
@@ -124,6 +131,10 @@ function CardLayouts({ data }) {
   //   }
   //   setFilteredProducts(sortedData);
   // }, [searchQuery, data, sortOption]);
+
+  useEffect(() => {
+    setSearchQuery(transcript)
+  }, [transcript])
 
   return (
     <>
@@ -167,6 +178,21 @@ function CardLayouts({ data }) {
             Filter
           </Button>
         </ButtonGroup>
+        {/* Voice Search Button */}
+        <Button
+          leftIcon={<Icon as={FaMicrophone} />}
+          onClick={() => {
+            resetTranscript(); // Reset transcript before starting voice search
+            SpeechRecognition.startListening();
+          }}
+          variant="outline"
+          colorScheme="green"
+          style={{ marginRight: "10px" }}
+        >
+          {/* Voice Search */}
+        </Button>
+
+        {/* Search Input */}
         <Input
           placeholder="Search products"
           value={searchQuery}
@@ -218,7 +244,7 @@ function CardLayouts({ data }) {
                 <div style={mrpStyle}>{product["MRP"]}</div>
               </CardBody>
               <CardFooter>
-                <Button style={{color: "white", backgroundColor: "#549c4e"}} onClick={onOpen}>Buy Now</Button>
+                <Button style={{ color: "white", backgroundColor: "#549c4e" }} onClick={onOpen}>Buy Now</Button>
                 <Modal
                   isCentered
                   onClose={onClose}

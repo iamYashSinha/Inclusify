@@ -1,6 +1,6 @@
 import React from "react"; // Import React
-import Hero from "../components/common/sections/Hero"; // Correct the import path for Hero
-import LandingLayout from "../components/common/layouts/LandingLayouts"; // Correct the import path for LandingLayout
+import Hero from "../components/sections/Hero"; // Correct the import path for Hero
+import LandingLayout from "../components/layouts/LandingLayouts"; // Correct the import path for LandingLayout
 
 export default function Landing() {
   const imageURL =

@@ -10,6 +10,10 @@ import {
   Icon,
   Image,
   Input,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   Stack,
 } from "@chakra-ui/react";
 import {
@@ -24,16 +28,24 @@ import jsonData from "../utils/Hand_Disability_Products.json";
 function CardLayouts({ data }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(data);
+  const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
+  const [sortOption, setSortOption] = useState("Relevance"); // Default sorting option
 
   const cardStyle = {
-    flex: "0 0 calc(25% - 20px)",
-    margin: "10px",
-    padding: "20px",
+    flex: "0 0 calc(20% - 20px)",
+    margin: "40px",
+    padding: "10px",
     border: "1px solid #ccc",
     borderRadius: "10px",
     overflow: "hidden",
     transition: "transform 0.3s, box-shadow 0.3s",
     position: "relative",
+    height: "450px", // Adjusted card height
+  };
+
+  const hoverStyle = {
+    transform: "scale(1.1)",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   };
 
   const iconStyle = {
@@ -48,14 +60,9 @@ function CardLayouts({ data }) {
 
   const imageStyle = {
     width: "100%",
-    height: "200px",
+    height: "150px",
     objectFit: "cover",
-    transition: "opacity 0.3s, transform 0.3s",
     borderRadius: "10px",
-  };
-
-  const imageHoverStyle = {
-    transform: "scale(1.1)",
   };
 
   const titleStyle = {
@@ -82,6 +89,30 @@ function CardLayouts({ data }) {
     setFilteredProducts(filtered);
   }, [searchQuery, data]);
 
+  useEffect(() => {
+    // Implement sorting logic based on the selected sort option
+    let sortedData = [...filteredProducts];
+    switch (sortOption) {
+      case "Price Low to High":
+        sortedData.sort(
+          (a, b) =>
+            parseFloat(a["Product Price"]) - parseFloat(b["Product Price"])
+        );
+        break;
+      case "Price High to Low":
+        sortedData.sort(
+          (a, b) =>
+            parseFloat(b["Product Price"]) - parseFloat(a["Product Price"])
+        );
+        break;
+      // Default case is "Relevance"
+      default:
+        // You can implement your relevance-based sorting logic here
+        break;
+    }
+    setFilteredProducts(sortedData);
+  }, [sortOption, filteredProducts]);
+
   return (
     <>
       <div
@@ -93,18 +124,32 @@ function CardLayouts({ data }) {
         }}
       >
         <ButtonGroup spacing="2">
-          <Button
-            leftIcon={<Icon as={FaSort} />}
-            variant="solid"
-            colorScheme="blue"
-          >
-            Sort
-          </Button>
+          <Menu>
+            <MenuButton
+              as={Button}
+              leftIcon={<Icon as={FaSort} />}
+              variant="solid"
+              colorScheme="green"
+            >
+              Sort
+            </MenuButton>
+            <MenuList>
+              <MenuItem onClick={() => setSortOption("Price Low to High")}>
+                Price Low to High
+              </MenuItem>
+              <MenuItem onClick={() => setSortOption("Price High to Low")}>
+                Price High to Low
+              </MenuItem>
+              <MenuItem onClick={() => setSortOption("Relevance")}>
+                Relevance
+              </MenuItem>
+            </MenuList>
+          </Menu>
           <Button
             leftIcon={<Icon as={FaFilter} />}
             variant="outline"
-            colorScheme="blue"
-            _hover={{ bg: "blue.500", color: "white" }}
+            colorScheme="green"
+            _hover={{ bg: "green.500", color: "white" }}
             style={{ marginRight: "10px" }}
           >
             Filter
@@ -126,26 +171,19 @@ function CardLayouts({ data }) {
         }}
       >
         {filteredProducts.map((product, index) => (
-          <Card key={index} style={cardStyle}>
-            {/* <Icon
-              as={FaHeart}
-              style={iconStyle}
-              onClick={() => {
-                // Handle wishlist action
-              }}
-            />
-            <Icon
-              as={FaShoppingCart}
-              style={{ ...iconStyle, right: "40px" }}
-              onClick={() => {
-                // Handle add to cart action
-              }}
-            /> */}
+          <Card
+            key={index}
+            style={{
+              ...cardStyle,
+              ...(hoveredCardIndex === index ? hoverStyle : {}),
+            }}
+            onMouseEnter={() => setHoveredCardIndex(index)}
+            onMouseLeave={() => setHoveredCardIndex(null)}
+          >
             <Image
               src={product["Image URL"]}
               alt={product["Product Name"]}
               style={{ ...imageStyle }}
-              _hover={imageHoverStyle}
             />
             <Stack
               mt="6"
@@ -169,7 +207,7 @@ function CardLayouts({ data }) {
               </CardBody>
               <CardFooter>
                 <ButtonGroup spacing="2">
-                  <Button variant="solid" colorScheme="blue">
+                  <Button variant="solid" colorScheme="green">
                     Buy now
                   </Button>
                 </ButtonGroup>

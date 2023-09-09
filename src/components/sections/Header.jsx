@@ -91,22 +91,16 @@ const Header = (props) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
-          <MenuItem>
+          <MenuItem to="#">
             <ContrastAdjuster
               contrastEnabled={contrastEnabled}
               setContrastEnabled={setContrastEnabled}
             />
           </MenuItem>
-          <MenuItem>
+          <MenuItem to="#">
             <NavFont />
           </MenuItem>
           <MenuItem to="/login">Login </MenuItem>
-          <MenuItem to="/signup" isLast></MenuItem>
-
-          <MenuItem to="/home">Home</MenuItem>
-          <MenuItem to="/how">How It works</MenuItem>
-          <MenuItem to="/features">Features</MenuItem>
-          <MenuItem to="/pricing">Pricing</MenuItem>
           <MenuItem to="/signup" isLast noHover>
             <Button
               size="sm"

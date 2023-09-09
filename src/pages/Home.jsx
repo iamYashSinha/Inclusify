@@ -13,6 +13,8 @@ import database, { app } from "../firebase";
 
 import CardLayouts from "../components/CardLayouts";
 
+import jsonData from '../utils/Hand_Disability_Products.json'
+
 function Home() {
   const [disability, setDisability] = useState();
   useEffect(() => {
@@ -60,7 +62,7 @@ function Home() {
         <TabPanels>
           <TabPanel>
             <p>one!</p>
-            <CardLayouts />
+            <CardLayouts data={jsonData}/>
           </TabPanel>
           <TabPanel>
             <p>two!</p>

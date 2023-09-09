@@ -13,21 +13,21 @@ import {
   Button,
   Input,
 } from "@chakra-ui/react";
-import jsonData from "../utils/Hand_Disability_Products.json";
-function CardLayouts() {
+// import jsonData from "../utils/Hand_Disability_Products.json";
+function CardLayouts({data}) {
   const [disability, setDisability] = useState();
   
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(jsonData);
+  const [filteredProducts, setFilteredProducts] = useState(data);
 
 
   useEffect(() => {
     // Filter products based on the search query
-    const filtered = jsonData.filter((product) =>
+    const filtered = data.filter((product) =>
       product["Product Name"].toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setFilteredProducts(filtered);
-  }, [searchQuery]);
+    setFilteredProducts(filtered)
+  }, [searchQuery, data]);
 
 
   const cardStyle = {
@@ -61,7 +61,11 @@ function CardLayouts() {
       onChange={(e) => setSearchQuery(e.target.value)}
     />
     <div
-      style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between" }}
+       style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+      }}
     >
       {filteredProducts.map((product, index) => (
         <Card key={index} style={cardStyle}>

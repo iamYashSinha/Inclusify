@@ -8,17 +8,18 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import ErrorPage from "./pages/Error";
+import Home from "./pages/Home.jsx"
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/about" element={<About />} />
-          <Route exact path="*" element={<ErrorPage />}></Route>
+          <Route exact path="/home" element={<Home />}/>
         </Routes>
         <Footer />
       </BrowserRouter>

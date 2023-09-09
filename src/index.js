@@ -1,12 +1,15 @@
 import React from "react";
-import * as ReactDOMClient from "react-dom/client";
+import ReactDOM from "react-dom";
+import { ChakraProvider } from "@chakra-ui/react";
 import App from "./App";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/style.css";
+import customTheme from "./utils/theme";
 
-const root = ReactDOMClient.createRoot(document.getElementById("root"));
-root.render(
+const rootElement = document.getElementById("root");
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <ChakraProvider theme={customTheme}>
+      <App />
+    </ChakraProvider>
+  </React.StrictMode>,
+  rootElement
 );

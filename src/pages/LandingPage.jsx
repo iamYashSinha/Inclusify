@@ -1,49 +1,20 @@
-import React, { useState, useEffect } from "react";
-import HeroSection from "./LandingPage/HeroSection";
-import AboutSection from "./LandingPage/AboutSection";
+import React from "react"; // Import React
+import Hero from "../components/common/sections/Hero"; // Correct the import path for Hero
+import LandingLayout from "../components/common/layouts/LandingLayouts"; // Correct the import path for LandingLayout
 
-import { getDatabase, ref, onValue } from "firebase/database";
-
-
-import database, { app } from "../firebase";
-
-const LandingPage = () => {
-
-  const [disability, setDisability] = useState();
-  useEffect(() => {
-    // Firebase configuration
-    // Initialize Firebase
-    const fetchData = async () => {
-      // Create a reference to the specific formRef in the Realtime Database
-      const db = getDatabase(app);
-      const formRef = ref(db, `Disability`);
-      try {
-        // Fetch data from the Realtime Database
-        onValue(formRef, (snapshot) => {
-          const data = snapshot.val();
-          console.log(data);
-          setDisability(data);
-        });
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-    return () => {
-      // Unsubscribe from the Firebase listener
-    };
-  }, []);
-
-  const handleChange = () => { };
+export default function Landing() {
+  const imageURL =
+    "https://images.unsplash.com/photo-1516714819001-8ee7a13b71d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80";
 
   return (
-    <>
-
-      <HeroSection />
-      <AboutSection />
-    </>
+    <LandingLayout>
+      <Hero
+        title="Build this rad landing page from scratch"
+        subtitle="This is the subheader section where you describe the basic benefits of your product"
+        image={imageURL}
+        ctaText="Create your account now"
+        ctaLink="/signup"
+      />
+    </LandingLayout>
   );
-};
-
-export default LandingPage;
+}

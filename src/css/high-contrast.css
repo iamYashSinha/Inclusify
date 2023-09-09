@@ -14,3 +14,7 @@
 .high-contrast a {
   text-decoration: underline;
 }
+
+.high-contrast button {
+  border: dotted 2px greenyellow;
+}

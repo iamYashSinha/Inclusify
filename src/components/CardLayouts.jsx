@@ -89,30 +89,6 @@ function CardLayouts({ data }) {
     setFilteredProducts(filtered);
   }, [searchQuery, data]);
 
-  useEffect(() => {
-    // Implement sorting logic based on the selected sort option
-    let sortedData = [...filteredProducts];
-    switch (sortOption) {
-      case "Price Low to High":
-        sortedData.sort(
-          (a, b) =>
-            parseFloat(a["Product Price"]) - parseFloat(b["Product Price"])
-        );
-        break;
-      case "Price High to Low":
-        sortedData.sort(
-          (a, b) =>
-            parseFloat(b["Product Price"]) - parseFloat(a["Product Price"])
-        );
-        break;
-      // Default case is "Relevance"
-      default:
-        // You can implement your relevance-based sorting logic here
-        break;
-    }
-    setFilteredProducts(sortedData);
-  }, [sortOption, filteredProducts]);
-
   return (
     <>
       <div

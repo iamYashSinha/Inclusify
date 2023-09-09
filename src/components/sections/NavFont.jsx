@@ -1,4 +1,6 @@
 import React from "react";
+import { IconButton } from "@chakra-ui/react";
+import { FiPlus, FiMinus } from "react-icons/fi";
 
 // Add this function to NavFont.jsx
 function changeGlobalFontSize(delta) {
@@ -20,9 +22,27 @@ function NavFont() {
 
   return (
     <div>
-      <p>Font</p>
-      <button onClick={increaseFontSize}>+</button>
-      <button onClick={decreaseFontSize}>-</button>
+      <p>Font Size</p>
+      <IconButton
+        isRound={true}
+        variant="solid"
+        colorScheme="teal"
+        aria-label="Increase font size"
+        fontSize="20px"
+        size="xs"
+        onClick={increaseFontSize}
+        icon={<FiPlus />}
+      />
+      <IconButton
+        isRound={true}
+        variant="solid"
+        colorScheme="teal"
+        aria-label="Decrease font size"
+        fontSize="20px"
+        size="xs"
+        onClick={decreaseFontSize}
+        icon={<FiMinus />}
+      />
     </div>
   );
 }

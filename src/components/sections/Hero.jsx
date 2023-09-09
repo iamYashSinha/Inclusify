@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import HoverSpeak from "./HoverSpeak"
+
 import {
   Box,
   Button,
@@ -42,7 +44,10 @@ export default function Hero({
           color="primary.800"
           textAlign={["center", "center", "left", "left"]}
         >
-          {title}
+          <HoverSpeak text={title}>
+
+            {title}
+          </HoverSpeak>
         </Heading>
         <Heading
           as="h2"

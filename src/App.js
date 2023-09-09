@@ -8,7 +8,8 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import ErrorPage from "./pages/Error";
-import Home from "./pages/Home.jsx"
+import Home from "./pages/Home.jsx";
+import Login from "./components/sections/Login.jsx";
 
 const App = () => {
   return (
@@ -20,8 +21,10 @@ const App = () => {
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/home" element={<Home />}/>
+          {/* <Route exact path="*" element={<ErrorPage />}></Route> */}
+          <Route exact path="/login" element={<Login />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </>
   );

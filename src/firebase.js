@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyA-AtMKkyYksLNeNnfJg9gJWMybBayz1oE",
   authDomain: "roarathon-efa2f.firebaseapp.com",
@@ -14,6 +14,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const database = getDatabase(app);
-
-export { app, database };
+const provider = new GoogleAuthProvider();
+export { app, database, auth, provider};

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import HoverSpeak from "./HoverSpeak";
 import { Box, Button, Flex, Image, Heading, Stack } from "@chakra-ui/react";
+import { useHoverSpeak } from "../../HoverSpeakContext"; // Import the useHoverSpeak hook
 
 export default function Hero({
   title,
@@ -12,10 +13,12 @@ export default function Hero({
   ctaText,
   ...rest
 }) {
-  // Split the title into two parts: before and after "Accessibility"
   const parts = title.split("Accessibility");
   const beforeAccessibility = parts[0];
   const afterAccessibility = parts.slice(1).join("Accessibility");
+
+  // Use the useHoverSpeak hook to access hoverSpeakEnabled
+  const { hoverSpeakEnabled } = useHoverSpeak();
 
   return (
     <Flex
@@ -40,7 +43,7 @@ export default function Hero({
           color="black"
           textAlign={["center", "center", "left", "left"]}
         >
-          <HoverSpeak text={title}>
+          <HoverSpeak text={title} isEnabled={hoverSpeakEnabled}>
             {beforeAccessibility}
             <span style={{ color: "#48BB78" }}>Accessibility</span>
             {afterAccessibility}
@@ -83,6 +86,7 @@ Hero.propTypes = {
   image: PropTypes.string,
   ctaText: PropTypes.string,
   ctaLink: PropTypes.string,
+  hoverSpeakEnabled: PropTypes.bool, // Receive hoverSpeakEnabled as a prop
 };
 
 Hero.defaultProps = {

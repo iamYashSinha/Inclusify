@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button } from "@chakra-ui/react";
 import Logo from "../ui/Logo";
@@ -7,25 +6,35 @@ import NavFont from "./NavFont";
 import ContrastAdjuster from "./ContrastAdjuster";
 
 import "../../css/high-contrast.css";
+import { useHoverSpeak } from "../../HoverSpeakContext";
 
-const MenuItem = ({ children, isLast, to = "/", noHover, ...rest }) => {
+const MenuItem = ({
+  children,
+  isLast,
+  to = "/",
+  noHover,
+  onClick,
+  ...rest
+}) => {
   return (
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       display="block"
       position="relative"
-      padding="0.5rem 1rem" // Add padding
+      padding="0.5rem 1rem"
       _hover={
         !noHover && {
-          background: "#4CAF50", // Lighten the green color
+          background: "#4CAF50",
           color: "white",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Add shadow on hover
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
         }
       }
       {...rest}
     >
-      <Link to={to}>{children}</Link>
+      <Link to={to} onClick={onClick}>
+        {children}
+      </Link>
     </Text>
   );
 };
@@ -55,7 +64,8 @@ const MenuIcon = () => (
 const Header = (props) => {
   const [show, setShow] = React.useState(false);
   const toggleMenu = () => setShow(!show);
-  const [contrastEnabled, setContrastEnabled] = useState(false);
+  const [contrastEnabled, setContrastEnabled] = React.useState(false);
+  const { hoverSpeakEnabled, toggleHoverSpeak } = useHoverSpeak(); // Use the hook to access HoverSpeak state
 
   return (
     <Flex
@@ -91,6 +101,9 @@ const Header = (props) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
+          <MenuItem to="#" onClick={toggleHoverSpeak}>
+            {hoverSpeakEnabled ? "Turn Off HoverSpeak" : "Turn On HoverSpeak"}
+          </MenuItem>
           <MenuItem to="#">
             <ContrastAdjuster
               contrastEnabled={contrastEnabled}
@@ -100,7 +113,7 @@ const Header = (props) => {
           <MenuItem to="#">
             <NavFont />
           </MenuItem>
-          <MenuItem to="/login">Login </MenuItem>
+          <MenuItem to="/login">Login</MenuItem>
           <MenuItem to="/signup" isLast noHover>
             <Button
               size="sm"

@@ -134,7 +134,7 @@ function CardLayouts({ data }) {
 
   useEffect(() => {
     setSearchQuery(transcript)
-  }, [transcript])
+  }, [transcript, data])
 
   return (
     <>
@@ -244,7 +244,7 @@ function CardLayouts({ data }) {
                 <div style={mrpStyle}>{product["MRP"]}</div>
               </CardBody>
               <CardFooter>
-                <Button style={{ color: "white", backgroundColor: "#549c4e" }} onClick={onOpen}>Buy Now</Button>
+                <a href="https://buy.stripe.com/test_00g6pb9hU5JZgvedQQ" style={{ color: "white", backgroundColor: "#549c4e" }}>Buy Now</a>
                 <Modal
                   isCentered
                   onClose={onClose}

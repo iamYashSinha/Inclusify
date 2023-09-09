@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.left-side {
+  flex: 1;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.child {
+  display: flex;
+  align-items: center;
+}
+
+.left-side-or {
+  margin-right: 10px;
+}
+
+.right-side-button button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.right-side {
+  flex: 1;
+  text-align: center;
+}
+
+/* Add more CSS for styling as needed */

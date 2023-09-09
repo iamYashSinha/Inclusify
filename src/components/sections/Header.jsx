@@ -14,6 +14,7 @@ const MenuItem = ({
   to = "/",
   noHover,
   onClick,
+  hoverSpeakEnabled,
   ...rest
 }) => {
   return (
@@ -30,6 +31,8 @@ const MenuItem = ({
           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Add shadow on hover
         }
       }
+      bg={hoverSpeakEnabled ? "#4CAF50" : "transparent"}
+      color={hoverSpeakEnabled ? "white" : "inherit"}
       {...rest}
     >
       <Link to={to} onClick={onClick}>
@@ -104,7 +107,7 @@ const Header = (props) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
-          <MenuItem to="#" onClick={toggleHoverSpeak}>
+          <MenuItem to="#" onClick={toggleHoverSpeak} hoverSpeakEnabled={hoverSpeakEnabled}>
             {hoverSpeakEnabled ? "Turn Off HoverSpeak" : "Turn On HoverSpeak"}
           </MenuItem>
           <MenuItem to="#">

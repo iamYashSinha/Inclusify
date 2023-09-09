@@ -3,6 +3,9 @@ import { Button } from "@chakra-ui/react";
 import { auth, provider } from "../../firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import "../../css/login.css"
+
 
 function Login() {
   const [value, setValue] = useState("");
@@ -37,28 +40,31 @@ function Login() {
 
   const navigate = useNavigate();
 
-  return (
-    <div className="login">
-      {value ? (
-        <div>
-          <p>Welcome, {value}</p>
-          {photoURL && <img src={photoURL} alt="User" />}
-          {navigate('/')}
-        </div>
-      ) : (
+// Inside your Login component JSX
+
+return (
+
+  <div className="login">
+  
+    {value ? (
+      <div>
+        <p>Welcome, {value}</p>
+        {photoURL && <img src={photoURL} alt="User" />}
+        {navigate('/')}
+      </div>
+    ) : (
+      <div className="button-container">
         <Button
           onClick={handleClick}
-          style={{
-            background: "#CFD9F3",
-            padding: "15px 30px 15px 30px",
-            boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
-          }}
+          className="login-button"
         >
           Login With Google
         </Button>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
+
 }
 
 export default Login;

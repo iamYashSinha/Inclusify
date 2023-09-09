@@ -26,7 +26,8 @@ function NavFont() {
       <IconButton
         isRound={true}
         variant="solid"
-        colorScheme="teal"
+        colorScheme="green"
+        margin="0.5rem"
         aria-label="Increase font size"
         fontSize="20px"
         size="xs"
@@ -36,7 +37,7 @@ function NavFont() {
       <IconButton
         isRound={true}
         variant="solid"
-        colorScheme="teal"
+        colorScheme="green"
         aria-label="Decrease font size"
         fontSize="20px"
         size="xs"

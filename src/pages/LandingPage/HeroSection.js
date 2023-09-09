@@ -1,4 +1,6 @@
 import React from "react";
+import HoverSpeak from '../HoverSpeak.jsx';
+
 
 const HeroSection = () => {
   const textStyle = {
@@ -16,10 +18,12 @@ const HeroSection = () => {
 
   return (
     <div>
-      <div style={textStyle}>
-        Unlocking Digital <span style={accessibilityStyle}>Accessibility</span>{" "}
-        for All
-      </div>
+      <HoverSpeak text="Unlocking Digital Accessibility for All">
+        <div style={textStyle}>
+          Unlocking Digital <span style={accessibilityStyle}>Accessibility</span>{" "}
+          for All
+        </div>
+      </HoverSpeak>
     </div>
   );
 };

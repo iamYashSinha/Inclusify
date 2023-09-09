@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import HeroSection from "./LandingPage/HeroSection";
 import AboutSection from "./LandingPage/AboutSection";
 
@@ -35,7 +35,7 @@ const LandingPage = () => {
     };
   }, []);
 
-  const handleChange = () => {};
+  const handleChange = () => { };
 
   return (
     <>

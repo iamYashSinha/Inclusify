@@ -1,0 +1,16 @@
+/* High-contrast styles for text elements and buttons */
+.high-contrast * {
+  color: white;
+  background-color: black;
+}
+
+.high-contrast p {
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 4px;
+}
+
+.high-contrast a {
+  text-decoration: underline;
+}

@@ -49,7 +49,6 @@ export default function Hero({
         <Heading
           as="h2"
           size="md"
-          color="black"
           opacity="0.8"
           fontWeight="normal"
           lineHeight={1.5}

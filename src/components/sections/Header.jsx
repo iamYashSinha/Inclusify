@@ -1,8 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button } from "@chakra-ui/react";
 import Logo from "../ui/Logo";
 import NavFont from "./NavFont";
+import ContrastAdjuster from "./ContrastAdjuster";
+
+import "../../css/high-contrast.css";
 
 const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
   return (
@@ -42,6 +46,7 @@ const MenuIcon = () => (
 const Header = (props) => {
   const [show, setShow] = React.useState(false);
   const toggleMenu = () => setShow(!show);
+  const [contrastEnabled, setContrastEnabled] = useState(false);
 
   return (
     <Flex
@@ -77,7 +82,13 @@ const Header = (props) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
-          <MenuItem to="#">
+          <MenuItem>
+            <ContrastAdjuster
+              contrastEnabled={contrastEnabled}
+              setContrastEnabled={setContrastEnabled}
+            />
+          </MenuItem>
+          <MenuItem>
             <NavFont />
           </MenuItem>
           <MenuItem to="/login">Login </MenuItem>

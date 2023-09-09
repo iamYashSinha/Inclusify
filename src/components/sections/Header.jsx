@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Flex, Text, Button } from "@chakra-ui/react";
 import Logo from "../ui/Logo";
@@ -7,8 +6,16 @@ import NavFont from "./NavFont";
 import ContrastAdjuster from "./ContrastAdjuster";
 
 import "../../css/high-contrast.css";
+import { useHoverSpeak } from "../../HoverSpeakContext";
 
-const MenuItem = ({ children, isLast, to = "/", noHover, ...rest }) => {
+const MenuItem = ({
+  children,
+  isLast,
+  to = "/",
+  noHover,
+  onClick,
+  ...rest
+}) => {
   return (
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
@@ -25,7 +32,9 @@ const MenuItem = ({ children, isLast, to = "/", noHover, ...rest }) => {
       }
       {...rest}
     >
-      <Link to={to}>{children}</Link>
+      <Link to={to} onClick={onClick}>
+        {children}
+      </Link>
     </Text>
   );
 };
@@ -58,7 +67,8 @@ const MenuIcon = () => (
 const Header = (props) => {
   const [show, setShow] = React.useState(false);
   const toggleMenu = () => setShow(!show);
-  const [contrastEnabled, setContrastEnabled] = useState(false);
+  const [contrastEnabled, setContrastEnabled] = React.useState(false);
+  const { hoverSpeakEnabled, toggleHoverSpeak } = useHoverSpeak(); // Use the hook to access HoverSpeak state
 
   return (
     <Flex
@@ -94,6 +104,9 @@ const Header = (props) => {
           direction={["column", "row", "row", "row"]}
           pt={[4, 4, 0, 0]}
         >
+          <MenuItem to="#" onClick={toggleHoverSpeak}>
+            {hoverSpeakEnabled ? "Turn Off HoverSpeak" : "Turn On HoverSpeak"}
+          </MenuItem>
           <MenuItem to="#">
             <ContrastAdjuster
               contrastEnabled={contrastEnabled}
@@ -104,7 +117,9 @@ const Header = (props) => {
             <NavFont />
           </MenuItem>
           {getUserPhoto ? (
-            <MenuItem to="/profile"><img src={getUserPhoto} alt="" /></MenuItem>
+            <MenuItem to="/profile">
+              <img src={getUserPhoto} alt="" />
+            </MenuItem>
           ) : (
             <MenuItem to="/login">Login</MenuItem>
           )}
@@ -118,7 +133,7 @@ const Header = (props) => {
                 bg: [
                   "primary.100",
                   "primary.100",
-                  "primary.600",  
+                  "primary.600",
                   "primary.600",
                 ],
               }}

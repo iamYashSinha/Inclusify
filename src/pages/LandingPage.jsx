@@ -9,11 +9,11 @@ export default function Landing() {
   return (
     <LandingLayout>
       <Hero
-        title="Build this rad landing page from scratch"
-        subtitle="This is the subheader section where you describe the basic benefits of your product"
+        title="Unlocking Digital Accessibility for All"
+        subtitle="Our mission is to empower users to customize their online experience to match their unique needs."
         image={imageURL}
-        ctaText="Create your account now"
-        ctaLink="/signup"
+        ctaText="Get started"
+        ctaLink="/home"
       />
     </LandingLayout>
   );

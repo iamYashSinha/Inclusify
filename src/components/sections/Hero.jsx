@@ -1,17 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import HoverSpeak from "./HoverSpeak"
-
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Heading,
-  Stack,
-  Text
-} from "@chakra-ui/react";
+import HoverSpeak from "./HoverSpeak";
+import { Box, Button, Flex, Image, Heading, Stack } from "@chakra-ui/react";
 
 export default function Hero({
   title,
@@ -21,6 +12,11 @@ export default function Hero({
   ctaText,
   ...rest
 }) {
+  // Split the title into two parts: before and after "Accessibility"
+  const parts = title.split("Accessibility");
+  const beforeAccessibility = parts[0];
+  const afterAccessibility = parts.slice(1).join("Accessibility");
+
   return (
     <Flex
       align="center"
@@ -41,18 +37,19 @@ export default function Hero({
           as="h1"
           size="xl"
           fontWeight="bold"
-          color="primary.800"
+          color="black"
           textAlign={["center", "center", "left", "left"]}
         >
           <HoverSpeak text={title}>
-
-            {title}
+            {beforeAccessibility}
+            <span style={{ color: "#48BB78" }}>Accessibility</span>
+            {afterAccessibility}
           </HoverSpeak>
         </Heading>
         <Heading
           as="h2"
           size="md"
-          color="primary.800"
+          color="black"
           opacity="0.8"
           fontWeight="normal"
           lineHeight={1.5}
@@ -72,15 +69,6 @@ export default function Hero({
             {ctaText}
           </Button>
         </Link>
-        <Text
-          fontSize="xs"
-          mt={2}
-          textAlign="center"
-          color="primary.800"
-          opacity="0.6"
-        >
-          No credit card required.
-        </Text>
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         {/* TODO: Make this change every X secs */}
@@ -95,7 +83,7 @@ Hero.propTypes = {
   subtitle: PropTypes.string,
   image: PropTypes.string,
   ctaText: PropTypes.string,
-  ctaLink: PropTypes.string
+  ctaLink: PropTypes.string,
 };
 
 Hero.defaultProps = {
@@ -104,5 +92,5 @@ Hero.defaultProps = {
     "This is the subheader section where you describe the basic benefits of your product",
   image: "https://source.unsplash.com/collection/404339/800x600",
   ctaText: "Create your account now",
-  ctaLink: "/signup"
+  ctaLink: "/signup",
 };

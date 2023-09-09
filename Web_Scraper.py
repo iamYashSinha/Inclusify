@@ -2,8 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-url = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=Hand+disability&_sacat=0&LH_TitleDesc=0&_odkw=Leg+disability+&_osacat=0"
-
+url = "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=leg+disability&_sacat=0&LH_TitleDesc=0&_odkw=hand+disability+&_osacat=0"
 response = requests.get(url)
 
 if response.status_code == 200:
@@ -25,7 +24,7 @@ if response.status_code == 200:
 
         data.append(product_info)
 
-    with open("Hand_Disability_Products.json", "w", encoding="utf-8") as json_file:
+    with open("Leg_Disability_Products.json", "w", encoding="utf-8") as json_file:
         json.dump(data, json_file, indent=4, ensure_ascii=False)
 
     print("Data has been scraped and saved in JSON format.")

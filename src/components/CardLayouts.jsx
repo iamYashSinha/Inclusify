@@ -15,6 +15,14 @@ import {
   MenuList,
   MenuItem,
   Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import {
   FaHeart,
@@ -30,6 +38,7 @@ function CardLayouts({ data }) {
   const [filteredProducts, setFilteredProducts] = useState(data);
   const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
   const [sortOption, setSortOption] = useState("Relevance"); // Default sorting option
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const cardStyle = {
     flex: "0 0 calc(20% - 20px)",
@@ -89,6 +98,33 @@ function CardLayouts({ data }) {
     );
     setFilteredProducts(filtered);
   }, [searchQuery, data]);
+
+  //   useEffect(() => {
+  //   // Filter products based on searchQuery
+  //   const filtered = data.filter((product) =>
+  //     product["Product Name"].toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  //   // Sort the filtered products based on the selected sorting option
+  //   let sortedData = [...filtered];
+  //   switch (sortOption) {
+  //     case "Price Low to High":
+  //       sortedData.sort((a, b) =>
+  //         parseFloat(a["Product Price"]) - parseFloat(b["Product Price"])
+  //       );
+  //       break;
+  //     case "Price High to Low":
+  //       sortedData.sort((a, b) =>
+  //         parseFloat(b["Product Price"]) - parseFloat(a["Product Price"])
+  //       );
+  //       break;
+  //     // Default case is "Relevance"
+  //     default:
+  //       // You can implement your relevance-based sorting logic here
+  //       break;
+  //   }
+  //   setFilteredProducts(sortedData);
+  // }, [searchQuery, data, sortOption]);
+
   return (
     <>
       <div
@@ -134,7 +170,7 @@ function CardLayouts({ data }) {
         <Input
           placeholder="Search products"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery on input change
           style={{ maxWidth: "400px" }}
         />
         <Icon as={FaSearch} style={{ fontSize: "20px", marginLeft: "10px" }} />
@@ -182,11 +218,26 @@ function CardLayouts({ data }) {
                 <div style={mrpStyle}>{product["MRP"]}</div>
               </CardBody>
               <CardFooter>
-                <ButtonGroup spacing="2">
-                  <Button variant="solid" colorScheme="green">
-                    Buy now
-                  </Button>
-                </ButtonGroup>
+                <Button style={{color: "white", backgroundColor: "#549c4e"}} onClick={onOpen}>Buy Now</Button>
+                <Modal
+                  isCentered
+                  onClose={onClose}
+                  isOpen={isOpen}
+                  motionPreset="slideInBottom"
+                >
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Product Description</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>{product["Description"]}</ModalBody>
+                    <ModalFooter>
+                      <Button colorScheme="blue" mr={3} onClick={onClose}>
+                        Close
+                      </Button>
+                      <Button variant="ghost">Buy</Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
               </CardFooter>
             </Stack>
           </Card>

@@ -1,64 +1,36 @@
-/* CardLayouts.css */
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
-  .card {
-    width: calc(33.33% - 20px); /* Adjust the width as needed */
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-  }
+.card {
+  flex: 0 0 calc(33.33% - 20px); /* Adjust the width as needed */
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px -5px;
+}
 
-  .card img {
-    max-width: 100%;
-  }
+.card img {
+  width: 100%; /* Ensure the image takes the full width of the card */
+  height: 200px; /* Set a fixed height for all card images */
+  object-fit: cover; /* Preserve aspect ratio and cover the entire card */
+  padding-bottom: 0%;
+}
 
-  .card-body {
-    padding: 20px;
-  }
+.card-body {
+  padding: 20px;
+  padding-bottom: 0%;
+}
 
-  .card-title {
-    font-size: 18px;
-    font-weight: bold;
-  }
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
 
-  .card-price {
-    font-size: 16px;
-    color: blue;
-  }
-/* CardLayouts.css */
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .card {
-    width: calc(33.33% - 20px); /* Adjust the width as needed */
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-
-  .card img {
-    max-width: 100%;
-  }
-
-  .card-body {
-    padding: 20px;
-  }
-
-  .card-title {
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .card-price {
-    font-size: 16px;
-    color: blue;
-  }
+.card-price {
+  font-size: 16px;
+  color: blue;
+}

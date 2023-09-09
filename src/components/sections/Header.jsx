@@ -8,12 +8,21 @@ import ContrastAdjuster from "./ContrastAdjuster";
 
 import "../../css/high-contrast.css";
 
-const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
+const MenuItem = ({ children, isLast, to = "/", noHover, ...rest }) => {
   return (
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
       display="block"
+      position="relative"
+      padding="0.5rem 1rem" // Add padding
+      _hover={
+        !noHover && {
+          background: "#4CAF50", // Lighten the green color
+          color: "white",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Add shadow on hover
+        }
+      }
       {...rest}
     >
       <Link to={to}>{children}</Link>
@@ -92,7 +101,13 @@ const Header = (props) => {
             <NavFont />
           </MenuItem>
           <MenuItem to="/login">Login </MenuItem>
-          <MenuItem to="/signup" isLast>
+          <MenuItem to="/signup" isLast></MenuItem>
+
+          <MenuItem to="/home">Home</MenuItem>
+          <MenuItem to="/how">How It works</MenuItem>
+          <MenuItem to="/features">Features</MenuItem>
+          <MenuItem to="/pricing">Pricing</MenuItem>
+          <MenuItem to="/signup" isLast noHover>
             <Button
               size="sm"
               rounded="md"
